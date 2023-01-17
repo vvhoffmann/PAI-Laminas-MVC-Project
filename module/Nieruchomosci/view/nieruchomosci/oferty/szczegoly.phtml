@@ -1,0 +1,32 @@
+<?= $this->form()->openTag($form) ?>
+<h2>Szczegóły oferty <?= $oferta->numer ?></h2>
+
+<table class="table table-striped">
+    <thead>
+            <tr>
+                <th><?= $form->get('typ_oferty')->getLabel() ?></th>
+                <th><?= $form->get('typ_nieruchomosci')->getLabel() ?></th>
+                <th><?= $form->get('powierzchnia')->getLabel() ?></th>
+                <th><?= $form->get('cena')->getLabel() ?> <br>
+                <th><?= $form->get('szczegoly')->getLabel() ?> <br>
+                <th></th>
+                <th></th>
+            </tr>
+    </thead>
+    <tbody>
+            <tr>
+                <td><?= $oferta->typ_oferty ?></td>
+                <td><?= $oferta->typ_nieruchomosci ?></td>
+                <td><?= $oferta->powierzchnia ?></td>
+                <td><?= $oferta->cena ?></td>
+                <td><?= $oferta->szczegoly ?></td>
+                <td>
+                    <a href="#" title="dodaj do koszyka" class="aDodajDoKoszyka"><i class="fas fa-cart-plus"></i></a>&nbsp;
+                    <a href="#" title="drukuj"><i class="fas fa-print"></i></a>
+                </td>
+                <td><a href="<?= $this->url('nieruchomosci', ['action' => 'lista']) ?>"title="Wróć do listy">POWRÓT</a></td>
+            </tr>
+    </tbody>
+</table>
+<?= $this->form()->closeTag($form); ?>
+</php>
