@@ -1,0 +1,25 @@
+<h1>Czy na pewno chcesz usunąć poniższy rekord?</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Imię</th>
+        <th>Nazwisko</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><?= $autor->id ?></td>
+        <td><?= $autor->imie ?></td>
+        <td><?= $autor->nazwisko ?></td>
+        <td>
+            <a href="<?= $this->url('autorzy', ['action' => 'usun', 'id' => $autor->id]) ?>"
+                title="TAK"><strong>TAK</strong></a>
+            <a href="<?= $this->url('autorzy', ['action' => 'lista']) ?>"
+                title="NIE"><strong>NIE</strong></a>
+        </td>
+    </tr>
+    </tbody>
+</table>

@@ -4,8 +4,19 @@ declare(strict_types=1);
 
 namespace Application;
 
+use Application\Controller\KsiazkiController;
+use Application\Controller\KsiazkiControllerFactory;
+use Application\Controller\AutorzyController;
+use Application\Controller\AutorzyControllerFactory;
+use Application\Form\KsiazkaForm;
+use Application\Form\AutorForm;
+use Application\Model\Autor;
+use Application\Model\Data;
+use Application\Model\Ksiazka;
+use Laminas\Mvc\Controller\LazyControllerAbstractFactory;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
+use Laminas\ServiceManager\AbstractFactory\ReflectionBasedAbstractFactory;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
@@ -31,12 +42,43 @@ return [
                     ],
                 ],
             ],
+            'ksiazki' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/ksiazki[/:action][/:id]',
+                    'defaults' => [
+                        'controller' => KsiazkiController::class,
+                        'action' => 'lista',
+                    ],
+                ],
+            ],
+            'autorzy' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/autorzy[/:action][/:id]',
+                    'defaults' => [
+                        'controller' => AutorzyController::class,
+                        'action' => 'lista',
+                    ],
+                ],
+            ],
         ],
     ],
-    'controllers' => [
+    'controllers' => [ 
+        'factories' => [ 
+            Controller\IndexController::class => LazyControllerAbstractFactory::class, 
+            KsiazkiController::class => KsiazkiControllerFactory::class,
+            AutorzyController::class => AutorzyControllerFactory::class,
+        ], 
+    ],
+    'service_manager' => [
         'factories' => [
-            Controller\IndexController::class => InvokableFactory::class,
-        ],
+            Data::class => InvokableFactory::class, 
+            Ksiazka::class => InvokableFactory::class, 
+            Autor::class => InvokableFactory::class,
+            AutorForm::class => ReflectionBasedAbstractFactory::class,
+            KsiazkaForm::class => ReflectionBasedAbstractFactory::class, 
+        ], 
     ],
     'view_manager' => [
         'display_not_found_reason' => true,

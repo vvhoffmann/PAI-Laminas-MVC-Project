@@ -1,0 +1,23 @@
+<h1>Czy na pewno chcesz usunąć poniższy rekord?</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Tytuł</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><?= $ksiazka->id ?></td>
+        <td><?= $ksiazka->tytul ?></td>
+        <td>
+            <a href="<?= $this->url('ksiazki', ['action' => 'usun', 'id' => $ksiazka->id]) ?>"
+                title="TAK"><strong>TAK</strong></a>
+            <a href="<?= $this->url('ksiazki', ['action' => 'lista']) ?>"
+                title="NIE"><strong>NIE</strong></a>
+        </td>
+    </tr>
+    </tbody>
+</table>

@@ -7,18 +7,18 @@ class Miesiace
     public function pobierzWszystkie() 
     {
         $months = array (
-            array("Styczeń", "black"),
-            array("Luty", "magenta"),
+            array("Styczeń", "blue"),
+            array("Luty", "green"),
             array("Marzec", "yellow"),
-            array("Kwiecień", "pink"),
-            array("Maj", "navy"),
-            array("Czerwiec", "red"),
-            array("Lipiec", "blue"),
+            array("Kwiecień", "red"),
+            array("Maj", "pink"),
+            array("Czerwiec", "white"),
+            array("Lipiec", "black"),
             array("Sierpień", "indigo"),
-            array("Wrzesień", "green"),
+            array("Wrzesień", "violet"),
             array("Październik", "purple"),
-            array("Listopad", "violet"),
-            array("Grudzień", "orange")
+            array("Listopad", "orange"),
+            array("Grudzień", "brown")
           );
 
         return $months;

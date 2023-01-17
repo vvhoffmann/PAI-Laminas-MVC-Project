@@ -1,0 +1,23 @@
+<h1>Szczegóły książki</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Tytuł</th>
+        <th>Szczegóły</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><?= $ksiazka->id ?></td>
+        <td><?= $ksiazka->tytul ?></td>
+        <td><?= $ksiazka->opis ?></td>
+        <td>
+            <a href="<?= $this->url('ksiazki', ['action' => 'lista']) ?>"
+                title="wróć do listy">powrót</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
