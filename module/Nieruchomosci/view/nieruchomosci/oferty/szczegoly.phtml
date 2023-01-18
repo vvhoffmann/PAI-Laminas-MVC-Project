@@ -10,7 +10,6 @@
                 <th><?= $form->get('cena')->getLabel() ?> <br>
                 <th><?= $form->get('szczegoly')->getLabel() ?> <br>
                 <th></th>
-                <th></th>
             </tr>
     </thead>
     <tbody>
@@ -20,10 +19,6 @@
                 <td><?= $oferta->powierzchnia ?></td>
                 <td><?= $oferta->cena ?></td>
                 <td><?= $oferta->szczegoly ?></td>
-                <td>
-                    <a href="#" title="dodaj do koszyka" class="aDodajDoKoszyka"><i class="fas fa-cart-plus"></i></a>&nbsp;
-                    <a href="#" title="drukuj"><i class="fas fa-print"></i></a>
-                </td>
                 <td><a href="<?= $this->url('nieruchomosci', ['action' => 'lista']) ?>"title="Wróć do listy">POWRÓT</a></td>
             </tr>
     </tbody>

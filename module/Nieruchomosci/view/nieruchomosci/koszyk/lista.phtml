@@ -1,11 +1,11 @@
 <?php
-$this->headScript()->appendFile($this->basePath('/js/oferty.js'), 'text/javascript', ['defer' => true]);
-$form->setAttribute('action', $this->url('nieruchomosci/oferty', []))
+$this->headScript()->appendFile($this->basePath('/js/koszyk.js'), 'text/javascript', ['defer' => true]);
+$form->setAttribute('action', $this->url('nieruchomosci/koszyk', []))
 ?>
 
 <?= $this->form()->openTag($form) ?>
 
-<h2 class="my-3">Lista ofert</h2>
+<h2 class="my-3">Koszyk użytkownika</h2>
 
 <table class="table table-striped">
     <thead>
@@ -48,9 +48,9 @@ $form->setAttribute('action', $this->url('nieruchomosci/oferty', []))
                     ><i class="fas fa-folder-open"></i></a>
                     &nbsp;
                     <a
-                            href="<?= $this->url('nieruchomosci/koszyk', ['action' => 'dodaj', 'id' => $of->id]) ?>"
-                            title="dodaj do koszyka"
-                            class="aDodajDoKoszyka"
+                            href="<?= $this->url('nieruchomosci/koszyk', ['action' => 'usun', 'id' => $of->id]) ?>"
+                            title="usun z koszyka"
+                            class="aUsunZKoszyka"
                     ><i class="fas fa-cart-plus"></i></a>
                     &nbsp;
                     <a
@@ -67,8 +67,13 @@ $form->setAttribute('action', $this->url('nieruchomosci/oferty', []))
     $oferty, 
     'sliding', 
     ['partial/paginator.phtml', 'Nieruchomosci'], 
-    ['route' => 'nieruchomosci/oferty', 'parametry' => $parametry]
+    ['route' => 'nieruchomosci/koszyk', 'parametry' => $parametry]
 )
 ?>
 
 <?= $this->form()->closeTag($form); ?>
+<strong>Drukuj wszystko</strong>
+<a
+    href="<?= $this->url('nieruchomosci/oferty', ['action' => 'drukujWszystko']) ?>"
+    title="drukuj"
+><i class="fas fa-print"></i></a>

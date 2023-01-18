@@ -25,29 +25,39 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">Programowanie Aplikacji Internetowych</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">Programowanie Aplikacji Internetowych</a>
+    <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+    >
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <?= $this->navigation('navigation')
-                ->menu()
-                ->setPartial('menu')
-                ->render();
-            ?>
-        </div>
-    </nav>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <?= $this->navigation('navigation')
+            ->menu()
+            ->setPartial('menu')
+            ->render();
+        ?>
+    </div>
+</nav>
 
-    <div class="container">
-        <?= $this->content; ?>
-        <hr>
-        <footer class="d-flex">
-            <p class="w-50 text-secondary">Wyższa Szkoła Informatyki Stosowanej i Zarządzania <?= date('Y') ?>/<?= date('Y') + 1 ?></p>
-        </footer>
-    </div> <!-- /container -->
-    <?= $this->inlineScript() ?>
+<div class="container">
+    <?= $this->content; ?>
+    <hr>
+    <footer class="d-flex">
+        <p class="w-50 text-secondary">Wyższa Szkoła Informatyki Stosowanej i Zarządzania <?= date('Y') ?></p>
+        <p class="w-50 text-secondary text-right" id="liczba_ofert">Liczba ofert w koszyku: <strong><?= $this->liczba_ofert ?></strong>
+        </p>
+    </footer>
+</div> <!-- /container -->
+<?= $this->inlineScript() ?>
 </body>
 
 </html>

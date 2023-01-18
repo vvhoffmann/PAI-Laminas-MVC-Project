@@ -5,20 +5,18 @@ namespace Nieruchomosci\Controller;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use Nieruchomosci\Form;
+use Nieruchomosci\Model\Koszyk;
 use Nieruchomosci\Model\Oferta;
 
 class OfertyController extends AbstractActionController
 {
-    private Oferta $oferta;
-
     /**
      * OfertyController constructor.
      *
      * @param Oferta $oferta
      */
-    public function __construct(Oferta $oferta)
+    public function __construct(public Oferta $oferta)
     {
-        $this->oferta = $oferta;
     }
 
     public function listaAction()
@@ -48,6 +46,27 @@ class OfertyController extends AbstractActionController
         $form->populateValues($daneOferty);
 
         return ['oferta' => $daneOferty,
-                'form' => $form];
+                'form' => $form, ];
+    }
+
+    public function drukujAction()
+    {
+        $oferta = $this->oferta->pobierz($this->params('id'));
+
+        if ($oferta) {
+            $this->oferta->drukuj($oferta);
+        }
+
+        return $this->getResponse();
+    }
+
+    public function drukujWszystkoAction()
+    {
+        
+        $oferty = $this->oferta->pobierzDoDruku();
+        if ($oferty) {
+            $this->oferta->drukujWszystko($oferty);
+        }
+        return $this->getResponse();
     }
 }
