@@ -1,0 +1,94 @@
+<?php
+$this->headScript()->appendFile($this->basePath('/js/zapytanie.js'), 'text/javascript', ['defer' => true]);
+
+$email_odbiorca = new \Laminas\Form\Element\Email('email_odbiorca');
+$email_odbiorca->setLabel('Email Odbiorcy');
+$email_odbiorca->setValue("whoffmann2000@wp.pl");
+
+$tresc = new \Laminas\Form\Element\Textarea('tresc');
+$tresc->setAttributes(['rows' => 5]);
+$tresc->setValue("Dzień dobry, Jestem zainteresowany/a ofertą numer $oferta[numer]. \nProszę o kontakt.");
+
+$email_nadawca = new \Laminas\Form\Element\Email('email_nadawca');
+$email_nadawca->setLabel('Email Nadawcy');
+$email_nadawca->setValue("imie.nazwisko@gmail.com");
+
+$telefon = new \Laminas\Form\Element\Tel('telefon');
+$telefon->setLabel('Telefon');
+$telefon->setValue("999999999");
+
+?>
+
+<?= $this->form()->openTag($form) ?>
+<h2>Szczegóły oferty <?= $oferta->numer ?></h2>
+
+<table class="table table-striped">
+    <thead>
+            <tr>
+                <th><?= $form->get('typ_oferty')->getLabel() ?></th>
+                <th><?= $form->get('typ_nieruchomosci')->getLabel() ?></th>
+                <th><?= $form->get('powierzchnia')->getLabel() ?></th>
+                <th><?= $form->get('cena')->getLabel() ?> <br>
+                <th><?= $form->get('szczegoly')->getLabel() ?> <br>
+                <th></th>
+            </tr>
+    </thead>
+    <tbody>
+            <tr>
+                <td><?= $oferta->typ_oferty ?></td>
+                <td><?= $oferta->typ_nieruchomosci ?></td>
+                <td><?= $oferta->powierzchnia ?></td>
+                <td><?= $oferta->cena ?></td>
+                <td><?= $oferta->szczegoly ?></td>
+                <td><a href="<?= $this->url('nieruchomosci', ['action' => 'lista']) ?>"title="Wróć do listy">POWRÓT</a></td>
+            </tr>
+    </tbody>
+</table>
+<?= $this->form()->closeTag($form); ?>
+</php>
+
+<p>
+    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalZapytanie">
+        Wyślij zapytanie
+    </button>
+</p>
+
+<div
+        class="modal fade"
+        id="modalZapytanie"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Zapytanie</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form
+                        method="post"
+                        action="<?= $this->url('nieruchomosci/zapytanie', ['action' => 'wyslij'], null, true) ?>"
+                        id="formZapytanie"
+                >
+                    <strong> Email odbiorcy: </strong>
+                    <?= $this->formElement($email_odbiorca) ?>
+                    <strong> Treść wiadomości: </strong>
+                    <?= $this->formElement($tresc) ?>
+                    <strong> Email kontaktowy: </strong>
+                    <?= $this->formElement($email_nadawca) ?>
+                    <strong> Telefon: </strong>
+                    <?= $this->formElement($telefon) ?>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnWyslij">Wyślij</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+            </div>
+        </div>
+    </div>
+</div>
