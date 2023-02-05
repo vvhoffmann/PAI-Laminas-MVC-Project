@@ -1,0 +1,100 @@
+<?php
+$form->setAttribute('action', $this->url('admin/oferty'));
+$form_dodaj->setAttribute('action', $this->url('admin/oferty', ['action' => 'dodaj']));
+?>
+
+<script type="text/javascript">
+    $(function() {
+        $("#btnDodajOferte").click(function() {
+            const $frm = $("#frmDodajOferte");
+
+            $.post($frm.attr('action'), $frm.serializeArray(), function(resp) {
+                if (resp.wynik) {
+                    $("#content").load(location.href);
+                    $("#modalDodajOferte").modal('hide');
+                } else {
+                    $("#modalDodajOferte .modal-body").html(resp.html);
+                }
+            }, 'json');
+
+            return false;
+        });
+    });
+</script>
+
+<?= $this->form()->openTag($form) ?>
+
+<h2>Lista ofert</h2>
+
+<p>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDodajOferte">Dodaj ofertę</button>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th></th>
+            <th><?= $form->get('typ_oferty')->getLabel() ?></th>
+            <th><?= $form->get('typ_nieruchomosci')->getLabel() ?></th>
+            <th><?= $form->get('numer')->getLabel() ?></th>
+            <th><?= $form->get('powierzchnia')->getLabel() ?></th>
+            <th><?= $form->get('cena')->getLabel() ?></th>
+            <th></th>
+        </tr>
+        <tr class="szukaj">
+            <th></th>
+            <th><?= $this->formElement($form->get('typ_oferty')) ?></th>
+            <th><?= $this->formElement($form->get('typ_nieruchomosci')) ?></th>
+            <th><?= $this->formElement($form->get('numer')) ?></th>
+            <th><?= $this->formElement($form->get('powierzchnia')) ?></th>
+            <th><?= $this->formElement($form->get('cena')) ?></th>
+            <th><?= $this->formElement($form->get('szukaj')) ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($oferty as $of) : ?>
+            <tr>
+                <td><?= $of->id ?></td>
+                <td><?= $of->typ_oferty ?></td>
+                <td><?= $of->typ_nieruchomosci ?></td>
+                <td><?= $of->numer ?></td>
+                <td><?= $of->powierzchnia ?></td>
+                <td><?= $of->cena ?></td>
+                <td>
+                    <a href="<?= $this->url('admin/oferty', array('action' => 'edytuj', 'id' => $of->id)) ?>" title="edytuj"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a href="<?= $this->url('admin/oferty', array('action' => 'usun', 'id' => $of->id)) ?>" title="usuń"><span class="glyphicon glyphicon-trash"></span></a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<?= $this->paginationControl(
+    $oferty,
+    'sliding',
+    ['partial/paginator.phtml', 'Nieruchomosci'],
+    ['route' => 'admin/oferty', 'parametry' => $parametry]
+)
+?>
+<?= $this->form()->closeTag($form) ?>
+
+<!-- Modal -->
+<div class="modal fade" id="modalDodajOferte" tabindex="-1" role="dialog" aria-labelledby="modalDodajOferteLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalDodajOferteLabel">Dodaj ofertę</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <?=$this->partial('admin/oferty/dodaj', ['form_dodaj' => $this->form_dodaj]) ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnDodajOferte">Dodaj</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+            </div>
+        </div>
+    </div>
+</div>

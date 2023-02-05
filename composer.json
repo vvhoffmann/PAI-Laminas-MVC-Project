@@ -28,12 +28,14 @@
     "neilime/twbs-helper-module": "^3.8",
     "laminas/laminas-paginator-adapter-laminasdb": "^1.0",
     "mpdf/mpdf": "^8.0",
-    "laminas/laminas-mail": "^2.15"
+    "laminas/laminas-mail": "^2.15",
+    "laminas/laminas-crypt": "^3.9"
   },
   "autoload": {
     "psr-4": {
       "Application\\": "module/Application/src/",
-      "Nieruchomosci\\": "module/Nieruchomosci/src/"
+      "Nieruchomosci\\": "module/Nieruchomosci/src/",
+      "Admin\\": "module/Admin/src/"
     }
   },
   "autoload-dev": {

@@ -25,7 +25,9 @@ return [
     'Laminas\Router',
     'Laminas\Validator',
     'Laminas\ZendFrameworkBridge',
+    'Laminas\Log',
     'TwbsHelper',
     'Application',
     'Nieruchomosci',
+    'Admin',
 ];
